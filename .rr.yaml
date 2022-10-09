@@ -1,0 +1,10 @@
+server:
+  command: "php public/index.php"
+http:
+  address: 0.0.0.0:8000
+  pool:
+    num_workers: 4
+  middleware:
+    - static
+  static:
+    dir: public
