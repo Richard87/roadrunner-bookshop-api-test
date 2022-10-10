@@ -3,11 +3,31 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use App\Controller\DownloadAction;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /** A book. */
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new GetCollection(),
+        new Get(requirements: ["id" => "\d+"]),
+        new Post(),
+        new Delete(),
+        new Patch(),
+        new Get(
+            controller: DownloadAction::class,
+            name: "api_book_download",
+            uriTemplate: '/books/download',
+            read: false,
+        )
+    ]
+)]
 #[ORM\Entity]
 class Book
 {
