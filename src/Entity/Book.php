@@ -25,6 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
             name: "api_book_download",
             uriTemplate: '/books/download',
             read: false,
+            defaults: ["respond" => false]
         )
     ]
 )]
